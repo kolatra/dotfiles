@@ -60,7 +60,8 @@ alias du="du -ch"
 alias cat="bat"
 alias gd="git diff --name-only --relative --diff-filter=d | xargs bat --diff"
 
-alias fetch="python ~/.dotfiles/scripts/fetch.py"
+#alias fetch="python ~/.dotfiles/scripts/fetch.py"
+alias fetch="fastfetch"
 
 if is_command_present eza; then
   alias ls="eza -lh --all --group-directories-first --sort=name --time-style=long-iso --git --icons"
@@ -71,6 +72,8 @@ fi
 
 alias .="ls"
 alias l="ls"
+
+alias timers="systemctl list-timers"
 
 export PATH="/home/tyler/.local/bin:$PATH"
 
