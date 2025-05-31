@@ -20,25 +20,12 @@ in {
     ];
 
     home.file.".zshrc" = {
-        source = config.lib.file.mkOutOfStoreSymlink "/home/${user}/config/dotfiles/.zshrc";
+        source = config.lib.file.mkOutOfStoreSymlink "/home/${user}/.dotfiles/zsh/.zshrc";
     };
 
     home.file.".config/nvim" = {
-        source = config.lib.file.mkOutOfStoreSymlink "/home/${user}/config/dotfiles/kickstart.nvim";
+        source = config.lib.file.mkOutOfStoreSymlink "/home/${user}/.dotfiles/nvim";
     };
-
-    home.file.".oh-my-zsh" = {
-        source = config.lib.file.mkOutOfStoreSymlink "/home/${user}/config/dotfiles/oh-my-zsh";
-    };
-
-    # not sure yet if I need this
-    # xdg.configFile = {
-    #   "zsh" = {
-    #     source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/.config/zsh";
-    #     recursive = true;
-    #   };
-    #   # ...
-    # };
 
     programs.home-manager.enable = true;
 
