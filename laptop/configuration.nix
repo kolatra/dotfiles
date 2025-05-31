@@ -17,7 +17,7 @@
   services.gvfs.enable = true;
   services.udisks2.enable = true;
 
-  networking.hostName = "laptop"; # Define your hostname.
+  networking.hostName = "tethys"; # Define your hostname.
 
   # enable internet
   networking.networkmanager.enable = true;
@@ -116,7 +116,7 @@
   services.openssh.settings = {
     X11Forwarding = true;
     PermitRootLogin = "no";
-    PasswordAuthentication = false;
+    PasswordAuthentication = true;
   };
   services.openssh.openFirewall = true;
 
