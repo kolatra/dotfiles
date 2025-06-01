@@ -7,6 +7,14 @@ types = {
     "jpeg": "Pictures",
     "gif": "Pictures",
     "iso": "isos",
+    "zip": "archives",
+    "tar": "archives",
+    "gz": "archives",
+    "jar": "archives",
+    "flatpakref": "software",
+    "AppImage": "software",
+    "bundle": "software",
+    "rpm": "software",
 }
 
 def main():
@@ -19,7 +27,7 @@ def main():
 
         extension = filename.split(".")[-1]
         if extension not in types:
-            print("Unknown extension {}".format(filename))
+            print("[!] Unknown extension {}\n  - File: {}".format(extension, filename))
             continue
         destination = types[extension]
         os.rename("/home/tyler/Downloads/{}".format(filename), "/home/tyler/{}/{}".format(destination, filename))
