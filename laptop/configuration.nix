@@ -86,7 +86,7 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-     neovim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
+     neovim 
      wget
      unzip
      p7zip
@@ -99,11 +99,9 @@
      discord
      brightnessctl
      obsidian
-     nemo-with-extensions
-     nemo
   ];
   programs.firefox.enable = true;
-  # programs.thunar.enable = true;
+  programs.thunar.enable = true;
 
   programs.mtr.enable = true;
   programs.gnupg.agent = {

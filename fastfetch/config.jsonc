@@ -51,6 +51,12 @@
       "format": "{2}",
       "keyColor": "yellow"
     },
+    {
+      "type": "wm",
+      "key": "  󰍹 Window Manager",
+      "format": "{2}",
+      "keyColor": "yellow"
+    },
     "break",
     {
       "type": "cpu",
