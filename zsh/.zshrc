@@ -46,7 +46,7 @@ export EDITOR='nvim'
 # vim aliases
 alias vim="nvim"
 alias vimconfig="vim ~/.config/nvim"
-alias svim="sudo vim"
+alias svim="sudo nvim"
 
 # editing zsh
 alias refresh="source ~/.zshrc && echo 'Reloaded'"
