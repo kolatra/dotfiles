@@ -8,6 +8,8 @@ if [[ $HOSTNAME == 'pandora' ]]; then
   ZSH_THEME="af-magic"
 elif [[ $HOSTNAME == 'titan' ]]; then
   ZSH_THEME="apple"
+else
+  ZSH_THEME="bureau"
 fi
 
 HYPHEN_INSENSITIVE="true"
