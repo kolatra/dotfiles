@@ -38,10 +38,7 @@
   services.blueman.enable = true;
 
   # desktop
-  programs.hyprland = {
-    enable = true;
-    xwayland.enable = true;
-  };
+  services.desktopManager.plasma6.enable = true;
   services.displayManager.sddm.enable = true;
   services.displayManager.sddm.wayland.enable = true;
   services.displayManager.autoLogin.enable = true;
@@ -100,6 +97,8 @@
      discord
      brightnessctl
      obsidian
+     spotify
+     bitwarden-desktop
   ];
   programs.firefox.enable = true;
   programs.thunar.enable = true;
@@ -114,8 +113,8 @@
   services.openssh.enable = true;
   services.openssh.settings = {
     X11Forwarding = true;
-    PermitRootLogin = "no";
-    PasswordAuthentication = true;
+    PermitRootLogin = "yes";
+    PasswordAuthentication = false;
   };
   services.openssh.openFirewall = true;
 
