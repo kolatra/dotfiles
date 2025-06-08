@@ -26,5 +26,5 @@ echo 'Automated config installation is not supported yet.'
 # git clone https://github.com/kolatra/dotfiles.git
 # ln -s ~/dotfiles/nix /etc/nixos
 #
-# nixos-install
+# nixos-install --no-root-passwd
 
