@@ -1,16 +1,18 @@
 #!/run/current-system/sw/bin/bash
 
+DISK=/dev/vda
+
 echo '[*] Making partitions...'
-parted /dev/vda -- mklabel gpt
-parted /dev/vda -- mkpart root ext4 512MB -8GB
-parted /dev/vda -- mkpart swap linux-swap -8GB 100%
-parted /dev/vda -- mkpart ESP fat32 1MB 512MB
-parted /dev/vda -- set 3 esp on
+parted $DISK -- mklabel gpt
+parted $DISK -- mkpart root ext4 512MB -8GB
+parted $DISK -- mkpart swap linux-swap -8GB 100%
+parted $DISK -- mkpart ESP fat32 1MB 512MB
+parted $DISK -- set 3 esp on
 
 echo '[*] Formatting partitions...'
-mkfs.ext4 -L nixos /dev/vda1
-mkswap -L swap /dev/vda2
-mkfs.fat -F 32 -n boot /dev/vda3
+mkfs.ext4 -L nixos "${DISK}1"
+mkswap -L swap "${DISK}2"
+mkfs.fat -F 32 -n boot "${DISK}3"
 
 echo '[*] Mounting partitions...'
 mount /dev/disk/by-label/nixos /mnt
