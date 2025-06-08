@@ -17,6 +17,9 @@ mount /dev/disk/by-label/nixos /mnt
 mkdir -p /mnt/boot
 mount -o umask=077 /dev/disk/by-label/boot /mnt/boot
 
+mkdir -p /mnt/bin
+ln -s /run/current-system/sw/bin/bash /mnt/bin/bash
+
 nixos-generate-config --root /mnt
 nix-env -iA nixos.neovim
 echo 'Please run nvim /mnt/etc/nixos/configuration.nix to add required software.'
@@ -27,4 +30,6 @@ echo 'Automated config installation is not supported yet.'
 # ln -s ~/dotfiles/nix /mnt/etc/nixos
 #
 # nixos-install --no-root-passwd
+#
+# reboot
 
