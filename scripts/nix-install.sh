@@ -26,8 +26,7 @@ rm /mnt/etc/nixos/hardware-configuration.nix
 nixos-generate-config --root /mnt
 
 echo '[*] Installing NixOS...'
-nixos-install
+nixos-install --no-root-passwd
 
-read -p "Press any key to restart the system"
 reboot
 
