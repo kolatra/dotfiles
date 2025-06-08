@@ -12,8 +12,6 @@ in {
 
     programs.neovim.enable = true;
 
-    programs.firefox.enable = true;
-
     home.packages = with pkgs; [
         zsh
         oh-my-zsh
