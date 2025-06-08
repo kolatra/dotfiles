@@ -18,9 +18,8 @@ mkdir -p /mnt/boot
 mount -o umask=077 /dev/disk/by-label/boot /mnt/boot
 
 echo '[*] Updating hardware config...'
-
 mkdir -p /mnt/etc/nixos
-cp ~/dotfiles/laptop/* /mnt/etc/nixos
+cp -r ~/dotfiles/laptop/* /mnt/etc/nixos
 rm /mnt/etc/nixos/hardware-configuration.nix
 nixos-generate-config --root /mnt
 
