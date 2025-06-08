@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/run/current-system/sw/bin/bash
 
 # make partitions
 parted /dev/vda -- mklabel gpt
@@ -18,7 +18,7 @@ mkdir -p /mnt/boot
 mount -o umask=077 /dev/disk/by-label/boot /mnt/boot
 
 nixos-generate-config --root /mnt
-nix-env -iA neovim
+nix-env -iA nixos.neovim
 echo 'Please run nvim /mnt/etc/nixos/configuration.nix to add required software.'
 echo 'Automated config installation is not supported yet.'
 
