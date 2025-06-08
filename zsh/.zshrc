@@ -4,7 +4,11 @@ is_command_present() {
 
 export ZSH="$HOME/.oh-my-zsh"
 
-ZSH_THEME="minimal"
+if [[ $HOSTNAME == 'pandora' ]]; then
+  ZSH_THEME="af-magic"
+elif [[ $HOSTNAME == 'titan' ]]; then
+  ZSH_THEME="apple"
+fi
 
 HYPHEN_INSENSITIVE="true"
 
