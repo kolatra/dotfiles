@@ -59,6 +59,7 @@ alias df="df -h"
 alias du="du -ch"
 alias cat="bat"
 alias gd="git diff --name-only --relative --diff-filter=d | xargs bat --diff"
+alias gs="git status"
 
 #alias fetch="python ~/.dotfiles/scripts/fetch.py"
 alias fetch="fastfetch"

@@ -20,16 +20,10 @@ mount -o umask=077 /dev/disk/by-label/boot /mnt/boot
 mkdir -p /mnt/bin
 ln -s /run/current-system/sw/bin/bash /mnt/bin/bash
 
+cp -r ~/dotfiles/laptop /mnt/etc/nixos
+rm /mnt/etc/nixos/hardware-configuration.nix
 nixos-generate-config --root /mnt
-nix-env -iA nixos.neovim
-echo 'Please run nvim /mnt/etc/nixos/configuration.nix to add required software.'
-echo 'Automated config installation is not supported yet.'
 
-# when there's an actual config
-# git clone https://github.com/kolatra/dotfiles.git
-# ln -s ~/dotfiles/nix /mnt/etc/nixos
-#
-# nixos-install --no-root-passwd
-#
-# reboot
+nixos-install
+reboot
 
