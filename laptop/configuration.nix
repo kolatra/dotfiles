@@ -87,6 +87,8 @@
      neovim 
      wget
      unzip
+     libgcc
+     gcc15
      p7zip
      git
      btop
