@@ -30,6 +30,7 @@ def main():
             print("[!] Unknown extension {}\n  - File: {}".format(extension, filename))
             continue
         destination = types[extension]
+        print("[~] Moving {}", filename)
         os.rename("/home/tyler/Downloads/{}".format(filename), "/home/tyler/{}/{}".format(destination, filename))
 
 if __name__ == "__main__":

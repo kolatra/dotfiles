@@ -82,6 +82,8 @@ alias l="ls"
 
 alias timers="systemctl list-timers"
 
+alias cowsay="uvx pycowsay"
+
 export PATH="/home/tyler/.local/bin:$PATH"
 
 export NVM_DIR="$HOME/.nvm"
