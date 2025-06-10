@@ -5,7 +5,7 @@ is_command_present() {
 export ZSH="$HOME/.oh-my-zsh"
 
 if [[ $HOSTNAME == 'pandora' ]]; then
-  ZSH_THEME="af-magic"
+  ZSH_THEME="eastwood"
 elif [[ $HOSTNAME == 'titan' ]]; then
   ZSH_THEME="apple"
 else
