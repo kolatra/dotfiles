@@ -17,6 +17,7 @@ types = {
     "rpm": "software",
 }
 
+
 def main():
     directory = os.fsencode("/home/tyler/Downloads")
 
@@ -31,7 +32,11 @@ def main():
             continue
         destination = types[extension]
         print("[~] Moving {}", filename)
-        os.rename("/home/tyler/Downloads/{}".format(filename), "/home/tyler/{}/{}".format(destination, filename))
+        os.rename(
+            "/home/tyler/Downloads/{}".format(filename),
+            "/home/tyler/{}/{}".format(destination, filename),
+        )
+
 
 if __name__ == "__main__":
     main()
