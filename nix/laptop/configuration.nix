@@ -6,9 +6,8 @@
 
 {
   imports =
-    [
+    [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
-      ../common.nix
     ];
 
   # Bootloader.
@@ -19,6 +18,9 @@
   services.udisks2.enable = true;
 
   networking.hostName = "tethys"; # Define your hostname.
+
+  # enable internet
+  networking.networkmanager.enable = true;
 
   # audio
   security.rtkit.enable = true;
@@ -42,6 +44,12 @@
   services.displayManager.autoLogin.enable = true;
   services.displayManager.autoLogin.user = "tyler";
 
+  # Set your time zone.
+  time.timeZone = "America/Edmonton";
+
+  # Select internationalisation properties.
+  i18n.defaultLocale = "en_US.UTF-8";
+
   i18n.extraLocaleSettings = {
     LC_ADDRESS = "en_US.UTF-8";
     LC_IDENTIFICATION = "en_US.UTF-8";
@@ -54,6 +62,12 @@
     LC_TIME = "en_US.UTF-8";
   };
 
+  # Configure keymap in X11
+  services.xserver.xkb = {
+    layout = "us";
+    variant = "";
+  };
+
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.tyler = {
     isNormalUser = true;
@@ -64,11 +78,24 @@
     openssh.authorizedKeys.keys = [ "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMEdQDJEnAKSK5MECKcpzcNFgPSs0BnHwCi53U88YTFN tyler" ];
   };
 
+  # Allow unfree packages
+  nixpkgs.config.allowUnfree = true;
+
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
+     neovim 
+     wget
+     unzip
      libgcc
+     gcc15
      p7zip
+     git
+     btop
+     kitty
+     fastfetch
+     rofi-wayland
+     waybar
      discord
      brightnessctl
      obsidian
@@ -77,18 +104,21 @@
   ];
   programs.firefox.enable = true;
   programs.thunar.enable = true;
-  programs.steam = {
-    enable = true;
-    remotePlay.openFirewall = true;
-    dedicatedServer.openFirewall = true;
-    localNetworkGameTransfers.openFirewall = true;
-  };
 
   programs.mtr.enable = true;
   programs.gnupg.agent = {
     enable = true;
     enableSSHSupport = true;
   };
+
+  # Enable the OpenSSH daemon.
+  services.openssh.enable = true;
+  services.openssh.settings = {
+    X11Forwarding = true;
+    PermitRootLogin = "yes";
+    PasswordAuthentication = false;
+  };
+  services.openssh.openFirewall = true;
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
