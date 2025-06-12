@@ -24,12 +24,6 @@
     (pkgs.writeShellScriptBin "rsync-backup" ''
       rsync -avh -e ssh --delete ~ "192.168.1.77:/hdd/backups/$HOSTNAME"
     '')
-
-    (pkgs.writeShellScriptBin "nix-clean" ''
-      sudo nix-collect-garbage --delete-older-than 10d &&\
-      nix-collect-garbage --delete-older-than 10d &&\
-      sudo /run/current-system/bin/switch-to-configuration boot
-    '')
   ];
 
   programs.firefox.enable = true;

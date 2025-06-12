@@ -19,6 +19,22 @@ in
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
+  # supposed to make the battery last longer
+  services.system76-scheduler.settings.cfsProfiles.enable = true;
+  services.thermald.enable = true;
+  powerManagement.powertop.enable = true;
+
+  environment.sessionVariables = {
+    # Prevent Firefox from creating ~/Desktop
+    XDG_DESKTOP_DIR = "$HOME";
+  };
+
+  nix.gc = {
+    automatic = true;
+    dates = "weekly";
+    options = "--delete-older-than 7d";
+  };
+
   systemd.network.enable = true;
 
   services.gvfs.enable = true;
@@ -32,6 +48,10 @@ in
   };
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings.trusted-users = [
+    "root"
+    "tyler"
+  ];
 
   # enable internet
   networking.networkmanager.enable = true;
@@ -115,6 +135,7 @@ in
      git
      btop
      brightnessctl
+     just
   ];
 
   programs.zsh.enable = true;

@@ -27,16 +27,15 @@ mkdir -p /mnt/boot
 mount -o umask=077 "${DISK}p3" /mnt/boot
 swapon "${DISK}p2"
 
-echo '[*] Updating hardware config...'
-mkdir -p /mnt/etc/nixos
-cp -r ~/shared/.dotfiles/laptop/* /mnt/etc/nixos
-nixos-generate-config --root /mnt
 
 echo '[*] Installing NixOS...'
-nixos-install
+nixos-install --flake github:kolatra/dotfiles?dir=nix
+
+# maybe?
+nixos-generate-config --root /mnt
 
 if [ $? -eq 0 ]; then
-  reboot
+  # reboot
 else
   echo '[!] Install failed.'
 fi
