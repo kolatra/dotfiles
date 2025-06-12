@@ -30,6 +30,11 @@
   # Enable networking
   networking.networkmanager.enable = true;
 
+  topology.self.interfaces.enp3s0 = {
+    addresses = ["192.168.1.77"];
+    network = "home";
+  };
+
   # Set your time zone.
   time.timeZone = "America/Edmonton";
 

@@ -2,22 +2,36 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, ... }:
+{ config, pkgs, inputs, ... }:
 
+let
+topology = inputs.nix-topology;
+in
 {
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
+      inputs.home-manager.nixosModules.default
+      inputs.nix-topology.nixosModules.default
     ];
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
+  systemd.network.enable = true;
+
   services.gvfs.enable = true;
   services.udisks2.enable = true;
 
   networking.hostName = "tethys"; # Define your hostname.
+
+  topology.self.interfaces.wlo1 = {
+    addresses = ["192.168.1.75"];
+    network = "home";
+  };
+
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   # enable internet
   networking.networkmanager.enable = true;
@@ -71,11 +85,19 @@
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.tyler = {
     isNormalUser = true;
-    description = "tyler";
     initialPassword = "correcthorse";
+    description = "main user";
     extraGroups = [ "networkmanager" "wheel" ];
     packages = with pkgs; [];
-    openssh.authorizedKeys.keys = [ "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMEdQDJEnAKSK5MECKcpzcNFgPSs0BnHwCi53U88YTFN tyler" ];
+    openssh.authorizedKeys.keys = [ "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFvgVYsV2xIxo2o8QKyt8CA2yKn+qU9AHLq5V7SRP8Xa tyler@artalok.io" ];
+    shell = pkgs.zsh;
+  };
+
+  home-manager = {
+    extraSpecialArgs = { inherit inputs; };
+    users = {
+      "tyler" = import ../../home-manager/tethys/home.nix;
+    };
   };
 
   # Allow unfree packages
@@ -92,18 +114,18 @@
      p7zip
      git
      btop
-     kitty
-     fastfetch
-     rofi-wayland
-     waybar
-     discord
      brightnessctl
-     obsidian
-     spotify
-     bitwarden-desktop
   ];
-  programs.firefox.enable = true;
-  programs.thunar.enable = true;
+
+  programs.zsh.enable = true;
+  programs.appimage.enable = true;
+  programs.appimage.binfmt = true;
+  programs.steam = {
+    enable = true;
+    remotePlay.openFirewall = true;
+    dedicatedServer.openFirewall = true;
+    localNetworkGameTransfers.openFirewall = true;
+  };
 
   programs.mtr.enable = true;
   programs.gnupg.agent = {
@@ -115,7 +137,7 @@
   services.openssh.enable = true;
   services.openssh.settings = {
     X11Forwarding = true;
-    PermitRootLogin = "yes";
+    PermitRootLogin = "no";
     PasswordAuthentication = false;
   };
   services.openssh.openFirewall = true;
@@ -124,6 +146,6 @@
   # networking.firewall.allowedTCPPorts = [ ... ];
   # networking.firewall.allowedUDPPorts = [ ... ];
 
-  system.stateVersion = "24.11";
+  system.stateVersion = "25.05";
 
 }
