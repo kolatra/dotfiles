@@ -13,6 +13,7 @@ in
       ./hardware-configuration.nix
       inputs.home-manager.nixosModules.default
       inputs.nix-topology.nixosModules.default
+      ./topology.nix
     ];
 
   # Bootloader.
@@ -42,16 +43,13 @@ in
 
   networking.hostName = "tethys"; # Define your hostname.
 
-  topology.self.interfaces.wlo1 = {
-    addresses = ["192.168.1.75"];
-    network = "home";
+  nix.settings = {
+    experimental-features = [ "nix-command" "flakes" ];
+    trusted-users = [
+      "root"
+      "tyler"
+    ];
   };
-
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
-  nix.settings.trusted-users = [
-    "root"
-    "tyler"
-  ];
 
   # enable internet
   networking.networkmanager.enable = true;
@@ -106,18 +104,11 @@ in
   users.users.tyler = {
     isNormalUser = true;
     initialPassword = "correcthorse";
-    description = "main user";
-    extraGroups = [ "networkmanager" "wheel" ];
+    description = "Tyler";
+    extraGroups = [ "networkmanager" "wheel" "audio" "video" "docker" ];
     packages = with pkgs; [];
     openssh.authorizedKeys.keys = [ "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFvgVYsV2xIxo2o8QKyt8CA2yKn+qU9AHLq5V7SRP8Xa tyler@artalok.io" ];
     shell = pkgs.zsh;
-  };
-
-  home-manager = {
-    extraSpecialArgs = { inherit inputs; };
-    users = {
-      "tyler" = import ../../home-manager/tethys/home.nix;
-    };
   };
 
   # Allow unfree packages
@@ -136,6 +127,10 @@ in
      btop
      brightnessctl
      just
+     eza
+     fastfetch
+     bat
+     yazi
   ];
 
   programs.zsh.enable = true;
@@ -147,6 +142,7 @@ in
     dedicatedServer.openFirewall = true;
     localNetworkGameTransfers.openFirewall = true;
   };
+  programs.java.enable = true;
 
   programs.mtr.enable = true;
   programs.gnupg.agent = {

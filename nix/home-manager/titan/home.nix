@@ -8,22 +8,14 @@ in {
     home = {
         username = "${user}";
         homeDirectory = "/home/${user}";
+        packages = with pkgs; [];
+        file = {
+            ".zshrc".source = ../../../zsh/.zshrc;
+            ".config/nvim".source = ../../../nvim;
+        };
     };
 
     programs.neovim.enable = true;
-
-    home.packages = with pkgs; [
-        zsh
-        oh-my-zsh
-    ];
-
-    home.file.".zshrc" = {
-        source = config.lib.file.mkOutOfStoreSymlink "/home/${user}/.dotfiles/zsh/.zshrc";
-    };
-
-    home.file.".config/nvim" = {
-        source = config.lib.file.mkOutOfStoreSymlink "/home/${user}/.dotfiles/nvim";
-    };
 
     programs.home-manager.enable = true;
 

@@ -1,40 +1,33 @@
 { config, pkgs, ... }:
 
 {
-  home.username = "tyler";
-  home.homeDirectory = "/home/tyler";
+  home = {
+    username = "tyler";
+    homeDirectory = "/home/tyler";
+    stateVersion = "25.05";
 
-  home.stateVersion = "25.05";
+    packages = with pkgs; [
+        kitty
+        discord
+        obsidian
+        spotify
+        bitwarden-desktop
+        element-desktop
 
-  # The home.packages option allows you to install Nix packages into your
-  # environment.
-  home.packages = with pkgs; [
-    eza
-    yazi
-    kitty
-    fastfetch
-    discord
-    obsidian
-    spotify
-    bitwarden-desktop
-    bat
+        jetbrains-mono
 
-    jetbrains-mono
+        (pkgs.writeShellScriptBin "rsync-backup" ''
+          rsync -avh -e ssh --delete ~ "192.168.1.77:/hdd/backups/$HOSTNAME"
+        '')
+    ];
 
-    (pkgs.writeShellScriptBin "rsync-backup" ''
-      rsync -avh -e ssh --delete ~ "192.168.1.77:/hdd/backups/$HOSTNAME"
-    '')
-  ];
-
-  programs.firefox.enable = true;
-
-  home.file = {
-    ".config/kitty".source = ../../../kitty;
-    ".config/fastfetch".source = ../../../fastfetch;
-    ".config/nvim".source = ../../../nvim;
-    ".zshrc".source = ../../../zsh/.zshrc;
-    "scripts".source = ../../../scripts;
-  };
+    file = {
+      ".config/kitty".source = ../../../kitty;
+      ".config/fastfetch".source = ../../../fastfetch;
+      ".config/nvim".source = ../../../nvim;
+      ".zshrc".source = ../../../zsh/.zshrc;
+      "scripts".source = ../../../scripts;
+    };
 
   # Home Manager can also manage your environment variables through
   # 'home.sessionVariables'. These will be explicitly sourced when using a
@@ -44,9 +37,12 @@
   #
   # tyler todo: put this in .zshrc?
   #  ~/.nix-profile/etc/profile.d/hm-session-vars.sh
-  home.sessionVariables = {
-    EDITOR = "nvim";
+    sessionVariables = {
+      EDITOR = "nvim";
+    };
   };
+
+  programs.firefox.enable = true;
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
