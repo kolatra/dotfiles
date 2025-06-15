@@ -27,15 +27,14 @@ mkdir -p /mnt/boot
 mount -o umask=077 "${DISK}p3" /mnt/boot
 swapon "${DISK}p2"
 
-
-echo '[*] Installing NixOS...'
-nixos-install --flake github:kolatra/dotfiles?dir=nix
-
-# maybe?
+cp ../nix/hosts/laptop/configuration.nix /mnt/etc/nixos
 nixos-generate-config --root /mnt
 
+echo '[*] Installing NixOS...'
+nixos-install --no-root-passwd
+
 if [ $? -eq 0 ]; then
-  # reboot
+  reboot
 else
   echo '[!] Install failed.'
 fi

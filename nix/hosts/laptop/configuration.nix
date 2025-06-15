@@ -12,11 +12,11 @@ in
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
       inputs.home-manager.nixosModules.default
-      inputs.nix-topology.nixosModules.default
       ./topology.nix
     ];
 
   # Bootloader.
+  # systemd-boot is recommended over GRUB for gpt schemes
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
@@ -45,6 +45,8 @@ in
 
   nix.settings = {
     experimental-features = [ "nix-command" "flakes" ];
+    # These users have additional rights when connecting to the nix daemon
+    # Such as specifying additional binary caches
     trusted-users = [
       "root"
       "tyler"
@@ -103,13 +105,16 @@ in
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.tyler = {
     isNormalUser = true;
-    initialPassword = "correcthorse";
+    # initialPassword = "correcthorse";
+    initialHashedPassword = "$y$j9T$EuTlDpQ6.PVZXOP7uuzNE/$UAqgMOoXZ0BVV95qIw03KFwFPhNj7vvfV0a593h.9rD";
     description = "Tyler";
     extraGroups = [ "networkmanager" "wheel" "audio" "video" "docker" ];
     packages = with pkgs; [];
     openssh.authorizedKeys.keys = [ "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFvgVYsV2xIxo2o8QKyt8CA2yKn+qU9AHLq5V7SRP8Xa tyler@artalok.io" ];
     shell = pkgs.zsh;
   };
+
+  users.users.root.initialHashedPassword = "$y$j9T$EuTlDpQ6.PVZXOP7uuzNE/$UAqgMOoXZ0BVV95qIw03KFwFPhNj7vvfV0a593h.9rD";
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;

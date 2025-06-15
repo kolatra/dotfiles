@@ -22,11 +22,11 @@
     ];
 
     file = {
-      ".config/kitty".source = ../../../kitty;
-      ".config/fastfetch".source = ../../../fastfetch;
-      ".config/nvim".source = ../../../nvim;
-      ".zshrc".source = ../../../zsh/.zshrc;
-      "scripts".source = ../../../scripts;
+      ".config/kitty".source = config.lib.file.mkOutOfStoreSymlink ../../../kitty;
+      ".config/fastfetch".source = config.lib.file.mkOutOfStoreSymlink ../../../fastfetch;
+      ".config/nvim".source = config.lib.file.mkOutOfStoreSymlink ../../../nvim;
+      ".zshrc".source = config.lib.file.mkOutOfStoreSymlink ../../../zsh/.zshrc;
+      "scripts".source = config.lib.file.mkOutOfStoreSymlink ../../../scripts;
     };
 
   # Home Manager can also manage your environment variables through
