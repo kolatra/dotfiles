@@ -122,7 +122,6 @@ in
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-     neovim 
      wget
      unzip
      libgcc
@@ -136,8 +135,17 @@ in
      fastfetch
      bat
      yazi
+     fzf
+     ripgrep
+
+     # required to make pyright work in nvim
+     nodejs
   ];
 
+  programs.neovim = {
+    enable = true;
+    defaultEditor = true;
+  };
   programs.zsh.enable = true;
   programs.appimage.enable = true;
   programs.appimage.binfmt = true;

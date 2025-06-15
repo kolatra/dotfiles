@@ -68,6 +68,7 @@
      fastfetch
      just
      unzip
+     unrar
      bat
   ];
 
@@ -103,9 +104,17 @@
   # Open ports in the firewall.
   networking.firewall.allowedTCPPorts = [ 80 443 8123 ];
   networking.firewall.allowedUDPPorts = [ 80 ];
-  # Or disable the firewall altogether.
   networking.firewall.enable = true;
   networking.firewall.allowPing = true;
   
   virtualisation.docker.enable = true;
+
+  # setup minecraft's folders
+  # despite the name, tmpfiles can (and often does) create permanent directories
+  systemd.tmpfiles.settings = {
+    # use fetchUrl, set downloadToTemp to true, and use postFetch to extract the contents and sort
+    # accordingly
+    "gtnh" = { d.mode = "0777"; };
+    "monifactory" = { d.mode = "0777"; };
+  };
 }

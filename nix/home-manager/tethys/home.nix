@@ -12,12 +12,18 @@
         obsidian
         spotify
         bitwarden-desktop
+        bitwarden-cli
         element-desktop
 
         jetbrains-mono
 
-        (pkgs.writeShellScriptBin "rsync-backup" ''
+        (writeShellScriptBin "rsync-backup" ''
           rsync -avh -e ssh --delete ~ "192.168.1.77:/hdd/backups/$HOSTNAME"
+        '')
+
+        # connect to titan
+        (writeShellScriptBin "takeoff" ''
+          ssh 192.168.1.77
         '')
     ];
 
@@ -29,14 +35,14 @@
       "scripts".source = config.lib.file.mkOutOfStoreSymlink ../../../scripts;
     };
 
-  # Home Manager can also manage your environment variables through
-  # 'home.sessionVariables'. These will be explicitly sourced when using a
-  # shell provided by Home Manager. If you don't want to manage your shell
-  # through Home Manager then you have to manually source 'hm-session-vars.sh'
-  # located at either
-  #
-  # tyler todo: put this in .zshrc?
-  #  ~/.nix-profile/etc/profile.d/hm-session-vars.sh
+    # Home Manager can also manage your environment variables through
+    # 'home.sessionVariables'. These will be explicitly sourced when using a
+    # shell provided by Home Manager. If you don't want to manage your shell
+    # through Home Manager then you have to manually source 'hm-session-vars.sh'
+    # located at either
+    #
+    # tyler todo: put this in .zshrc?
+    #  ~/.nix-profile/etc/profile.d/hm-session-vars.sh
     sessionVariables = {
       EDITOR = "nvim";
     };
