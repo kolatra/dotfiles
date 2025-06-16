@@ -14,14 +14,19 @@
   boot.extraModulePackages = [ ];
 
   fileSystems."/" =
-    { device = "/dev/disk/by-uuid/d5d60cfb-fbda-4b8c-8e25-b5db22aaee53";
+    { 
+      # device = "/dev/disk/by-uuid/d5d60cfb-fbda-4b8c-8e25-b5db22aaee53";
+      device = "/dev/disk/by-label/NixOS-Root";
       fsType = "ext4";
     };
 
-  boot.initrd.luks.devices."cryptroot".device = "/dev/disk/by-uuid/77974642-f710-4bcb-aba5-a8af839edc2b";
+  # boot.initrd.luks.devices."cryptroot".device = "/dev/disk/by-uuid/77974642-f710-4bcb-aba5-a8af839edc2b";
+  boot.initrd.luks.devices."cryptroot".device = "/dev/disk/by-label/NixOS-Encrypted";
 
   fileSystems."/boot" =
-    { device = "/dev/disk/by-uuid/1E6C-2B19";
+    { 
+      # device = "/dev/disk/by-uuid/1E6C-2B19";
+      device = "/dev/disk/by-label/boot";
       fsType = "vfat";
       options = [ "fmask=0077" "dmask=0077" ];
     };

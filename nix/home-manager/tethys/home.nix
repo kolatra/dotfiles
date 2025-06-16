@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
 {
   home = {
@@ -28,21 +28,15 @@
     ];
 
     file = {
-      ".config/kitty".source = config.lib.file.mkOutOfStoreSymlink ../../../kitty;
-      ".config/fastfetch".source = config.lib.file.mkOutOfStoreSymlink ../../../fastfetch;
-      ".config/nvim".source = config.lib.file.mkOutOfStoreSymlink ../../../nvim;
-      ".zshrc".source = config.lib.file.mkOutOfStoreSymlink ../../../zsh/.zshrc;
-      "scripts".source = config.lib.file.mkOutOfStoreSymlink ../../../scripts;
+      ".config/kitty".source = config.lib.file.mkOutOfStoreSymlink "/home/tyler/.dotfiles/nvim";
+      ".config/fastfetch".source = config.lib.file.mkOutOfStoreSymlink "/home/tyler/.dotfiles/fastfetch";
+      ".config/nvim".source = config.lib.file.mkOutOfStoreSymlink "/home/tyler/.dotfiles/nvim";
+      ".zshrc".source = config.lib.file.mkOutOfStoreSymlink "/home/tyler/.dotfiles/zsh/.zshrc";
+      "scripts".source = config.lib.file.mkOutOfStoreSymlink "/home/tyler/.dotfiles/scripts";
     };
 
-    # Home Manager can also manage your environment variables through
-    # 'home.sessionVariables'. These will be explicitly sourced when using a
-    # shell provided by Home Manager. If you don't want to manage your shell
-    # through Home Manager then you have to manually source 'hm-session-vars.sh'
-    # located at either
-    #
     # tyler todo: put this in .zshrc?
-    #  ~/.nix-profile/etc/profile.d/hm-session-vars.sh
+    # source ~/.nix-profile/etc/profile.d/hm-session-vars.sh
     sessionVariables = {
       EDITOR = "nvim";
     };

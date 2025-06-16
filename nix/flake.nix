@@ -9,9 +9,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    # graphical overview of infrastructure
     nix-topology.url = "github:oddlama/nix-topology";
     flake-utils.url = "github:numtide/flake-utils";
     mms.url = "github:mkaito/nixos-modded-minecraft-servers";
+
     # for handling secrets
     agenix.url = "github:ryantm/agenix";
   };

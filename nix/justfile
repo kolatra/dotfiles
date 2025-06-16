@@ -1,2 +1,5 @@
 generate-image:
 	nix build .#topology.x86_64-linux.config.output && sudo cp ./result/* . && sudo chown tyler:users ./*
+
+rebuild:
+	git add . && sudo nixos-rebuild switch --flake .#${HOSTNAME}

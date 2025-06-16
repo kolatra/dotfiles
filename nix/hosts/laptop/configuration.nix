@@ -13,6 +13,7 @@ in
       ./hardware-configuration.nix
       inputs.home-manager.nixosModules.default
       ./topology.nix
+      ../../modules/desktop/kde
     ];
 
   # Bootloader.
@@ -71,13 +72,6 @@ in
   };
   services.blueman.enable = true;
 
-  # desktop
-  services.desktopManager.plasma6.enable = true;
-  services.displayManager.sddm.enable = true;
-  services.displayManager.sddm.wayland.enable = true;
-  services.displayManager.autoLogin.enable = true;
-  services.displayManager.autoLogin.user = "tyler";
-
   # Set your time zone.
   time.timeZone = "America/Edmonton";
 
@@ -118,6 +112,7 @@ in
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
+  nixpkgs.config.allowUnfreePredicate = _: true;
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
@@ -137,6 +132,7 @@ in
      yazi
      fzf
      ripgrep
+     home-manager
 
      # required to make pyright work in nvim
      nodejs
