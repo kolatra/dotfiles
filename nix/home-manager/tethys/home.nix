@@ -28,7 +28,7 @@
     ];
 
     file = {
-      ".config/kitty".source = config.lib.file.mkOutOfStoreSymlink "/home/tyler/.dotfiles/nvim";
+      ".config/kitty".source = config.lib.file.mkOutOfStoreSymlink "/home/tyler/.dotfiles/kitty";
       ".config/fastfetch".source = config.lib.file.mkOutOfStoreSymlink "/home/tyler/.dotfiles/fastfetch";
       ".config/nvim".source = config.lib.file.mkOutOfStoreSymlink "/home/tyler/.dotfiles/nvim";
       ".zshrc".source = config.lib.file.mkOutOfStoreSymlink "/home/tyler/.dotfiles/zsh/.zshrc";

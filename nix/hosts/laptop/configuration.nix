@@ -13,7 +13,7 @@ in
       ./hardware-configuration.nix
       inputs.home-manager.nixosModules.default
       ./topology.nix
-      ../../modules/desktop/kde
+      ../../modules/desktop/gnome
     ];
 
   # Bootloader.
