@@ -114,7 +114,9 @@
   systemd.tmpfiles.settings = {
     # use fetchUrl, set downloadToTemp to true, and use postFetch to extract the contents and sort
     # accordingly
-    "gtnh" = { d.mode = "0777"; };
-    "monifactory" = { d.mode = "0777"; };
+    "minecraft-folders" = {
+      "gtnh" = { d.mode = "0777"; };
+      "monifactory" = { d.mode = "0777"; };
+    };
   };
 }
