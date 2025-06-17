@@ -14,6 +14,7 @@
         bitwarden-desktop
         bitwarden-cli
         element-desktop
+        thunderbird
 
         jetbrains-mono
 
@@ -46,6 +47,8 @@
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
+
+  systemd.user.startServices = "sd-switch";
 
   programs.git = {
       enable = true;

@@ -13,7 +13,7 @@ in
       ./hardware-configuration.nix
       inputs.home-manager.nixosModules.default
       ./topology.nix
-      ../../modules/desktop/gnome
+      ../../modules/desktop/kde
     ];
 
   # Bootloader.
@@ -37,7 +37,21 @@ in
     options = "--delete-older-than 7d";
   };
 
-  systemd.network.enable = true;
+  systemd = {
+    network.enable = true;
+    # despite the name, tmpfiles can (and often does) create permanent directories
+    tmpfiles.settings = {
+      "home-stuff" = {
+        "/home/tyler/code" = {
+          d = {
+            group = "users";
+            mode = "0755";
+            user = "tyler";
+          };
+        };
+      };
+    };
+  };
 
   services.gvfs.enable = true;
   services.udisks2.enable = true;
@@ -132,7 +146,6 @@ in
      yazi
      fzf
      ripgrep
-     home-manager
 
      # required to make pyright work in nvim
      nodejs
