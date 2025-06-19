@@ -21,9 +21,9 @@
   system.stateVersion = "24.11";
 
   # Bootloader
-  boot.loader.grub.enable = true;
-  boot.loader.grub.device = "/dev/sda";
-  boot.loader.grub.useOSProber = true;
+  # systemd-boot is recommended over GRUB for gpt schemes
+  boot.loader.systemd-boot.enable = true;
+  boot.loader.efi.canTouchEfiVariables = true;
 
   networking.hostName = "titan"; # Define your hostname.
 
@@ -111,12 +111,10 @@
 
   # setup minecraft's folders
   # despite the name, tmpfiles can (and often does) create permanent directories
-  systemd.tmpfiles.settings = {
+  systemd.tmpfiles.rules = [
     # use fetchUrl, set downloadToTemp to true, and use postFetch to extract the contents and sort
     # accordingly
-    "minecraft-folders" = {
-      "gtnh" = { d.mode = "0777"; };
-      "monifactory" = { d.mode = "0777"; };
-    };
-  };
+    "d /home/minecraft/gtnh 0777 minecraft minecraft -"
+    "d /home/minecraft/monifactory 0777 minecraft minecraft -"
+  ];
 }

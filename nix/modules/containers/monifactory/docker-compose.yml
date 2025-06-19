@@ -1,0 +1,28 @@
+services:
+  monifactory:
+    image: itzg/minecraft-server
+    stdin_open: true
+    tty: true
+    ports:
+      - 25565:25565
+    environment:
+      MOTD: "a Monifactory server powered by Docker"
+      EULA: "TRUE"
+      TYPE: AUTO_CURSEFORGE
+      CF_SLUG: monifactory
+      CF_API_KEY: '$$2a$$10$$bL4bIL5pUWqfcO7KQtnMReakwtfHbNKh6v1uTpKlzhwoueEJQnPnm'
+      OPS: |
+        1d5e02e0-7e54-4e9e-8d9c-548b22c02daf
+      MAX_TICK_TIME: "-1"
+      ALLOW_FLIGHT: "true"
+      ENABLE_COMMAND_BLOCK: "true"
+      WHITELIST: |
+        1d5e02e0-7e54-4e9e-8d9c-548b22c02daf
+      MEMORY: "8G"
+      FORCE_WORLD_COPY: "true"
+      restart: unless-stopped
+    volumes:
+      - ./game-data:/data
+
+volumes:
+  mc: {}

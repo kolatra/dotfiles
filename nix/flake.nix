@@ -29,7 +29,7 @@
         inputs.home-manager.nixosModules.home-manager {
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
-          home-manager.users.tyler = ./home-manager/tethys/home.nix;
+          home-manager.users.tyler = ./home-manager/laptop/home.nix;
           home-manager.extraSpecialArgs = { inherit inputs; };
         }
       ];
@@ -46,7 +46,7 @@
         inputs.home-manager.nixosModules.home-manager {
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
-          home-manager.users.tyler = ../server-nix/homes/titan.nix;
+          home-manager.users.tyler = ./home-manager/server/home.nix;
           home-manager.extraSpecialArgs = { inherit inputs; };
         }
       ];

@@ -22,6 +22,6 @@
       openssh.authorizedKeys.keys = [  "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMEdQDJEnAKSK5MECKcpzcNFgPSs0BnHwCi53U88YTFN tyler" ];
     };
 
-    users.users.root.initialHashedPassword = "$y$j9T$aXXv9hEOFeM5CTpHF/X8k0$zKNxX3lYxX1dNDHFOHn5kM/muWkYYB1Gvz96HzBXPR8"
+    root.initialHashedPassword = "$y$j9T$aXXv9hEOFeM5CTpHF/X8k0$zKNxX3lYxX1dNDHFOHn5kM/muWkYYB1Gvz96HzBXPR8";
   };
 }
