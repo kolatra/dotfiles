@@ -1,6 +1,19 @@
 {
   description = "Nixos config flake";
 
+  nixConfig = {
+    experimental-features = [
+      "nix-command"
+      "flakes"
+    ];
+
+    trusted-users = [
+      "root"
+    ];
+
+    warn-dirty = false;
+  };
+
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 

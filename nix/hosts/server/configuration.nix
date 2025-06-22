@@ -114,7 +114,7 @@
   systemd.tmpfiles.rules = [
     # use fetchUrl, set downloadToTemp to true, and use postFetch to extract the contents and sort
     # accordingly
-    "d /home/minecraft/gtnh 0777 minecraft minecraft -"
-    "d /home/minecraft/monifactory 0777 minecraft minecraft -"
+    "d /home/minecraft/gtnh 0755 minecraft minecraft -"
+    "d /home/minecraft/monifactory 0755 minecraft minecraft -"
   ];
 }
