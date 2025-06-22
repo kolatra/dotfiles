@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, lib, pkgs, ... }:
 
 {
     imports = [ ../common.nix ];
@@ -8,7 +8,13 @@
         xwayland.enable = true;
     };
 
-    config.environment.systemPackages = with pkgs; [
-        waybar
-    ] ++ config.environment.systemPackages; # add to existing list
+    environment.systemPackages = lib.attrValues {
+        inherit (pkgs)
+            waybar
+            brightnessctl
+            wl-clipboard
+            wtype
+            xdg-utils
+        ;
+    };
 }
