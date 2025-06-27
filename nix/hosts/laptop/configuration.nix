@@ -13,7 +13,7 @@ in
       ./hardware-configuration.nix
       inputs.home-manager.nixosModules.default
       ./topology.nix
-      ../../modules/desktop/kde
+      ../../modules/desktop/hyprland
     ];
 
   # Bootloader.
@@ -126,7 +126,6 @@ in
      p7zip
      git
      btop
-     brightnessctl
      just
      eza
      fastfetch
