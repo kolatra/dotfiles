@@ -37,6 +37,7 @@
       ];
 
       file = {
+        ".config/hypr".source = config.lib.file.mkOutOfStoreSymlink "/home/tyler/.dotfiles/hypr";
         ".config/kitty".source = config.lib.file.mkOutOfStoreSymlink "/home/tyler/.dotfiles/kitty";
         ".config/fastfetch".source = config.lib.file.mkOutOfStoreSymlink "/home/tyler/.dotfiles/fastfetch";
         ".config/nvim".source = config.lib.file.mkOutOfStoreSymlink "/home/tyler/.dotfiles/nvim";
