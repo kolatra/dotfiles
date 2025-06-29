@@ -20,6 +20,7 @@ in
   # systemd-boot is recommended over GRUB for gpt schemes
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
+  boot.plymouth.enable = true;
 
   # supposed to make the battery last longer
   services.system76-scheduler.settings.cfsProfiles.enable = true;
