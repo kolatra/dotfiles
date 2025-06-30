@@ -37,12 +37,12 @@
       ];
 
       file = {
-        ".config/hypr".source = config.lib.file.mkOutOfStoreSymlink "/home/tyler/.dotfiles/hypr";
-        ".config/kitty".source = config.lib.file.mkOutOfStoreSymlink "/home/tyler/.dotfiles/kitty";
-        ".config/fastfetch".source = config.lib.file.mkOutOfStoreSymlink "/home/tyler/.dotfiles/fastfetch";
-        ".config/nvim".source = config.lib.file.mkOutOfStoreSymlink "/home/tyler/.dotfiles/nvim";
-        ".zshrc".source = config.lib.file.mkOutOfStoreSymlink "/home/tyler/.dotfiles/zsh/.zshrc";
-        "scripts".source = config.lib.file.mkOutOfStoreSymlink "/home/tyler/.dotfiles/scripts";
+        ".config/hypr".source = config.lib.file.mkOutOfStoreSymlink "/home/tyler/dotfiles/config/hypr";
+        ".config/kitty".source = config.lib.file.mkOutOfStoreSymlink "/home/tyler/dotfiles/config/kitty";
+        ".config/fastfetch".source = config.lib.file.mkOutOfStoreSymlink "/home/tyler/dotfiles/config/fastfetch";
+        ".config/nvim".source = config.lib.file.mkOutOfStoreSymlink "/home/tyler/dotfiles/config/nvim";
+        ".zshrc".source = config.lib.file.mkOutOfStoreSymlink "/home/tyler/dotfiles/config/zsh/.zshrc";
+        "scripts".source = config.lib.file.mkOutOfStoreSymlink "/home/tyler/dotfiles/config/scripts";
       };
 
       # tyler todo: put this in .zshrc?
