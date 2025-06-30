@@ -1,11 +1,11 @@
 rm ~/.zshrc
-ln -s ~/.dotfiles/zsh/.zshrc ~/.zshrc
+ln -s ~/dotfiles/config/zsh/.zshrc ~/.zshrc
 
 rm ~/.config/nvim
-ln -s ~/.dotfiles/nvim ~/.config/nvim
+ln -s ~/dotfiles/config/nvim ~/.config/nvim
 
 rm ~/.config/fastfetch
-ln -s ~/.dotfiles/fastfetch ~/.config/fastfetch
+ln -s ~/dotfiles/config/fastfetch ~/.config/fastfetch
 
 rm ~/scripts
-ln -s ~/.dotfiles/scripts ~/scripts
+ln -s ~/dotfiles/config/scripts ~/scripts
