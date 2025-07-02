@@ -1,32 +1,96 @@
-# If you come from bash you might have to change your $PATH.
-# export PATH=$HOME/bin:/usr/local/bin:$PATH
+is_command_present() {
+  command -v "$1" > /dev/null 2>&1
+}
 
-#export ZSH="$HOME/.oh-my-zsh"
+export ZSH="$HOME/.oh-my-zsh"
 
-# Set-up icons for files/directories in terminal
-#alias ls='eza -a --icons'
-#alias ll='eza -al --icons'
-#alias lt='eza -a --tree --level=1 --icons'
+if [[ $HOSTNAME == 'pandora' ]]; then
+  ZSH_THEME="eastwood"
+elif [[ $HOSTNAME == 'titan' ]]; then
+  ZSH_THEME="apple"
+else
+  ZSH_THEME="bureau"
+fi
 
-# Starting down here, are set in user.nix
+HYPHEN_INSENSITIVE="true"
 
-#ZSH_THEME="xiong-chiamiov-plus"
+# Uncomment the following line if you want to disable marking untracked files
+# under VCS as dirty. This makes repository status check for large repositories
+# much, much faster.
+DISABLE_UNTRACKED_FILES_DIRTY="true"
 
-#plugins=(
-#    git
-    #zsh-autosuggestions
-    #zsh-syntax-highlighting
-#)
+# Uncomment the following line if you want to change the command execution time
+# stamp shown in the history command output.
+# You can set one of the optional three formats:
+# "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
+# or set a custom format using the strftime function format specifications,
+# see 'man strftime' for details.
+# HIST_STAMPS="mm/dd/yyyy"
 
-# Display Pokemon-colorscripts
-# Project page: https://gitlab.com/phoneybadger/pokemon-colorscripts#on-other-distros-and-macos
-#pokemon-colorscripts --no-title -s -r
+plugins=(
+  git
+  zsh-autosuggestions
+  docker
+  docker-compose
+  # dotenv
+  history
+  ubuntu
+)
 
+source $ZSH/oh-my-zsh.sh
 
-# Set-up FZF key bindings (CTRL R for fuzzy history finder)
-#source <(fzf --zsh)
+export EDITOR='nvim'
 
-#HISTFILE=~/.zsh_history
-#HISTSIZE=10000
-#SAVEHIST=10000
-#setopt appendhistory
+# Set personal aliases, overriding those provided by Oh My Zsh libs,
+# plugins, and themes. Aliases can be placed here, though Oh My Zsh
+# users are encouraged to define aliases within a top-level file in
+# the $ZSH_CUSTOM folder, with .zsh extension. Examples:
+# - $ZSH_CUSTOM/aliases.zsh
+# - $ZSH_CUSTOM/macos.zsh
+# For a full list of active aliases, run `alias`.
+
+# vim aliases
+alias vim="nvim"
+alias vimconfig="vim ~/.config/nvim"
+alias svim="sudo nvim"
+
+# editing zsh
+alias refresh="source ~/.zshrc && echo 'Reloaded'"
+alias zshrc="vim ~/.zshrc"
+alias ohmyzsh="vim ~/.oh-my-zsh"
+
+# commands with common args
+alias rmd="rm -rf"
+alias df="df -h"
+alias du="du -ch"
+alias cat="bat"
+alias gd="git diff --name-only --relative --diff-filter=d | xargs bat --diff"
+alias gs="git status"
+
+#alias fetch="python ~/.dotfiles/scripts/fetch.py"
+alias fetch="fastfetch"
+
+if is_command_present eza; then
+  alias ls="eza -lh --all --group-directories-first --sort=name --time-style=long-iso --git --icons"
+  alias lsm="eza -lh --all --group-directories-first --sort=mod --time-style=long-iso --git --icons"
+else
+  alias ls="ls -Failh"
+fi
+
+alias .="ls"
+alias l="ls"
+
+alias timers="systemctl list-timers"
+
+alias cowsay="uvx pycowsay"
+
+export PATH="/home/tyler/.local/bin:$PATH"
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+eval $(ssh-agent -s) &> /dev/null
+ssh-add ~/.ssh/id_github &> /dev/null
+
+fetch
