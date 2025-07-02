@@ -13,7 +13,7 @@ in
       ./hardware-configuration.nix
       inputs.home-manager.nixosModules.default
       ./topology.nix
-      ../../modules/desktop/hyprland
+      ../../modules/desktop/kde
     ];
 
   # Bootloader.
@@ -44,6 +44,17 @@ in
 
   services.gvfs.enable = true;
   services.udisks2.enable = true;
+
+  services.greetd = {
+    enable = true;
+    vt = 3;
+    settings = {
+      default_session = {
+        user = "tyler";
+        command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --cmd startplasma-wayland";
+      };
+    };
+  };
 
   networking.hostName = "tethys"; # Define your hostname.
 

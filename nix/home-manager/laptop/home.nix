@@ -16,6 +16,7 @@
 
       packages = with pkgs; [
           kitty
+          krita
           discord
           obsidian
           spotify
