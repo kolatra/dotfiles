@@ -6,85 +6,99 @@
 
 let
 topology = inputs.nix-topology;
+user = "tyler";
 in
 {
   imports =
-    [ # Include the results of the hardware scan.
+    [
       ./hardware-configuration.nix
       inputs.home-manager.nixosModules.default
       ./topology.nix
       ../../modules/desktop/kde
     ];
 
-  # Bootloader.
-  # systemd-boot is recommended over GRUB for gpt schemes
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.plymouth.enable = true;
-
-  # supposed to make the battery last longer
-  services.system76-scheduler.settings.cfsProfiles.enable = true;
-  services.thermald.enable = true;
-  powerManagement.powertop.enable = true;
 
   environment.sessionVariables = {
     # Prevent Firefox from creating ~/Desktop
     XDG_DESKTOP_DIR = "$HOME";
   };
 
-  nix.gc = {
-    automatic = true;
-    dates = "weekly";
-    options = "--delete-older-than 7d";
+  networking = {
+    hostName = "tethys";
+    networkmanager.enable = true;
+  };
+
+  nix = {
+    gc = {
+      automatic = true;
+      dates = "weekly";
+      options = "--delete-older-than 7d";
+    };
+
+    settings = {
+      experimental-features = [ "nix-command" "flakes" ];
+      trusted-users = [ "root" ];
+    };
   };
 
   systemd = {
     network.enable = true;
   };
 
-  services.gvfs.enable = true;
-  services.udisks2.enable = true;
+  powerManagement.powertop.enable = true;
+  services = {
+    system76-scheduler.settings.cfsProfiles.enable = true;
+    thermald.enable = true;
 
-  services.greetd = {
-    enable = true;
-    vt = 3;
-    settings = {
-      default_session = {
-        user = "tyler";
-        command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --cmd startplasma-wayland";
+    gvfs.enable = true;
+    udisks2.enable = true;
+
+    greetd = {
+      enable = true;
+      vt = 3;
+      settings = {
+        default_session = {
+          user = "${user}";
+          command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --cmd startplasma-wayland";
+        };
       };
+    };
+
+
+    openssh = {
+      enable = true;
+      openFirewall = true;
+      settings = {
+        X11Forwarding = true;
+        PermitRootLogin = "no";
+        PasswordAuthentication = false;
+      };
+    };
+
+    pipewire = {
+      enable = true;
+      alsa.enable = true;
+      alsa.support32Bit = true;
+      pulse.enable = true;
+    };
+
+    blueman.enable = true;
+
+    xserver.xkb = {
+      layout = "us";
+      variant = "";
     };
   };
 
-  networking.hostName = "tethys"; # Define your hostname.
-
-  nix.settings = {
-    experimental-features = [ "nix-command" "flakes" ];
-    # These users have additional rights when connecting to the nix daemon
-    # Such as specifying additional binary caches
-    trusted-users = [
-      "root"
-      "tyler"
-    ];
-  };
-
-  # enable internet
-  networking.networkmanager.enable = true;
-
-  # audio
   security.rtkit.enable = true;
-  services.pipewire = {
-    enable = true;
-    alsa.enable = true;
-    alsa.support32Bit = true;
-    pulse.enable = true;
-  };
 
   hardware.bluetooth = {
     enable = true;
     powerOnBoot = true;
   };
-  services.blueman.enable = true;
 
   # Set your time zone.
   time.timeZone = "America/Edmonton";
@@ -102,12 +116,6 @@ in
     LC_PAPER = "en_US.UTF-8";
     LC_TELEPHONE = "en_US.UTF-8";
     LC_TIME = "en_US.UTF-8";
-  };
-
-  # Configure keymap in X11
-  services.xserver.xkb = {
-    layout = "us";
-    variant = "";
   };
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
@@ -131,59 +139,71 @@ in
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-     wget
-     unzip
-     libgcc
-     gcc15
-     p7zip
-     git
+     bat
+     bitwarden-cli
+     bitwarden-desktop
      btop
-     just
+     discord
+     element-desktop
      eza
      fastfetch
-     bat
-     yazi
      fzf
-     ripgrep
-     home-manager
-
-     # required to make pyright work in nvim
+     gcc15
+     git
+     just
+     kitty
+     krita
+     libgcc
+     maliit-framework
+     maliit-keyboard
      nodejs
+     obsidian
+     p7zip
+     ripgrep
+     spotify
+     thunderbird
+     unzip
+     wget
+     yazi
   ];
 
-  programs.neovim = {
-    enable = true;
-    defaultEditor = true;
-  };
-  programs.zsh.enable = true;
-  programs.appimage.enable = true;
-  programs.appimage.binfmt = true;
-  programs.steam = {
-    enable = true;
-    remotePlay.openFirewall = true;
-    dedicatedServer.openFirewall = true;
-    localNetworkGameTransfers.openFirewall = true;
-  };
-  programs.java.enable = true;
+  programs = {
+    zsh = {
+      enable = true;
+      enableCompletion = true;
+      syntaxHighlighting.enable = true;
+    };
 
-  programs.mtr.enable = true;
-  programs.gnupg.agent = {
-    enable = true;
-    enableSSHSupport = true;
+    neovim = {
+      enable = true;
+      defaultEditor = true;
+    };
+
+    firefox.enable = true;
+
+    appimage = {
+      enable = true;
+      binfmt = true;
+    };
+
+    steam = {
+      enable = true;
+      remotePlay.openFirewall = true;
+      dedicatedServer.openFirewall = true;
+      localNetworkGameTransfers.openFirewall = true;
+    };
+
+    java.enable = true;
+
+    mtr.enable = true;
+    gnupg.agent = {
+      enable = true;
+      enableSSHSupport = true;
+    };
   };
 
-  # Enable the OpenSSH daemon.
-  services.openssh.enable = true;
-  services.openssh.settings = {
-    X11Forwarding = true;
-    PermitRootLogin = "no";
-    PasswordAuthentication = false;
-  };
-  services.openssh.openFirewall = true;
-
-  # Open ports in the firewall.
-  # networking.firewall.allowedTCPPorts = [ ... ];
-  # networking.firewall.allowedUDPPorts = [ ... ];
+  networking.firewall.allowedTCPPorts = [];
+  networking.firewall.allowedUDPPorts = [];
 
   system.stateVersion = "25.05";
 

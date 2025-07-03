@@ -38,13 +38,6 @@
       modules = [
         ./hosts/laptop/configuration.nix
         inputs.nix-topology.nixosModules.default
-        inputs.home-manager.nixosModules.default
-        inputs.home-manager.nixosModules.home-manager {
-          home-manager.useGlobalPkgs = true;
-          home-manager.useUserPackages = true;
-          home-manager.users.tyler = ./home-manager/laptop/home.nix;
-          home-manager.extraSpecialArgs = { inherit inputs; };
-        }
       ];
     };
 
