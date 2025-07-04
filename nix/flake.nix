@@ -38,6 +38,7 @@
       modules = [
         ./hosts/laptop/configuration.nix
         inputs.nix-topology.nixosModules.default
+        inputs.agenix.nixosModules.default
       ];
     };
 

@@ -1,7 +1,3 @@
-# Edit this configuration file to define what should be installed on
-# your system.  Help is available in the configuration.nix(5) man page
-# and in the NixOS manual (accessible by running ‘nixos-help’).
-
 { config, pkgs, inputs, ... }:
 
 let
@@ -20,6 +16,8 @@ in
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.plymouth.enable = true;
+
+  age.identityPaths = [ "/home/${user}/.ssh/id_ed25519" ];
 
   environment.sessionVariables = {
     # Prevent Firefox from creating ~/Desktop
@@ -121,7 +119,7 @@ in
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.tyler = {
     isNormalUser = true;
-    # initialPassword = "correcthorse";
+    # initialPassword = "";
     initialHashedPassword = "$y$j9T$EuTlDpQ6.PVZXOP7uuzNE/$UAqgMOoXZ0BVV95qIw03KFwFPhNj7vvfV0a593h.9rD";
     description = "Tyler";
     extraGroups = [ "networkmanager" "wheel" "audio" "video" "docker" ];
