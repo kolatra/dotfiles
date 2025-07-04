@@ -29,7 +29,7 @@
                   keyFile = "/tmp/secret.key";
                   allowDiscards = true;
                 };
-                additionalKeyFiles = [ "/tmp/additionalSecret.key" ];
+                # additionalKeyFiles = [ "/tmp/additionalSecret.key" ];
                 content = {
                   type = "lvm_pv";
                   vg = "pool";
