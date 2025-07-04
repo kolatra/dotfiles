@@ -3,7 +3,7 @@
     disk = {
       main = {
         type = "disk";
-        device = "<disk-name>";
+        device = "/dev/vda";
         content = {
           type = "gpt";
           partitions = {
@@ -24,12 +24,9 @@
                 name = "crypted";
                 extraOpenArgs = [ ];
                 settings = {
-                  # if you want to use the key for interactive login be sure there is no trailing newline
-                  # for example use `echo -n "password" > /tmp/secret.key`
-                  keyFile = "/tmp/secret.key";
+                  passwordFile = "/tmp/secret.key";
                   allowDiscards = true;
                 };
-                # additionalKeyFiles = [ "/tmp/additionalSecret.key" ];
                 content = {
                   type = "lvm_pv";
                   vg = "pool";
@@ -56,7 +53,7 @@
             };
           };
           home = {
-            size = "100G";
+            size = "10G";
             content = {
               type = "filesystem";
               format = "ext4";
@@ -64,7 +61,7 @@
             };
           };
           raw = {
-            size = "100G";
+            size = "10G";
           };
         };
       };
