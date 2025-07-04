@@ -3,7 +3,7 @@
     disk = {
       main = {
         type = "disk";
-        device = "/dev/vda";
+        device = "/dev/nvme0n1";
         content = {
           type = "gpt";
           partitions = {
@@ -23,8 +23,8 @@
                 type = "luks";
                 name = "crypted";
                 extraOpenArgs = [ ];
+                passwordFile = "/tmp/secret.key";
                 settings = {
-                  passwordFile = "/tmp/secret.key";
                   allowDiscards = true;
                 };
                 content = {
@@ -53,15 +53,12 @@
             };
           };
           home = {
-            size = "10G";
+            size = "200G";
             content = {
               type = "filesystem";
               format = "ext4";
               mountpoint = "/home";
             };
-          };
-          raw = {
-            size = "10G";
           };
         };
       };

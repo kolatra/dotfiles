@@ -1,19 +1,6 @@
 {
   description = "Nixos config flake";
 
-  nixConfig = {
-    experimental-features = [
-      "nix-command"
-      "flakes"
-    ];
-
-    trusted-users = [
-      "root"
-    ];
-
-    warn-dirty = false;
-  };
-
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
@@ -26,16 +13,22 @@
     nix-topology.url = "github:oddlama/nix-topology";
     flake-utils.url = "github:numtide/flake-utils";
     mms.url = "github:mkaito/nixos-modded-minecraft-servers";
+    disko = {
+      url = "github:nix-community/disko";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     # for handling secrets
     agenix.url = "github:ryantm/agenix";
   };
 
-  outputs = { self, nixpkgs, ... }@inputs: {
+  outputs = { self, nixpkgs, disko, ... }@inputs: {
     nixosConfigurations.tethys = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
       specialArgs = {inherit inputs;};
       modules = [
+	disko.nixosModules.disko
+	./hosts/laptop/disks.nix
         ./hosts/laptop/configuration.nix
         inputs.nix-topology.nixosModules.default
         inputs.agenix.nixosModules.default

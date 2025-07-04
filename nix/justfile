@@ -3,3 +3,6 @@ generate-image:
 
 rebuild:
 	git add . && sudo nixos-rebuild switch --flake .#${HOSTNAME}
+
+clean:
+	nix-collect-garbage -d && sudo nix-collect-garbage -d && sudo /run/current-system/bin/switch-to-configuration boot
