@@ -27,6 +27,8 @@ DISABLE_UNTRACKED_FILES_DIRTY="true"
 # see 'man strftime' for details.
 # HIST_STAMPS="mm/dd/yyyy"
 
+source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
 plugins=(
   git
   zsh-autosuggestions
