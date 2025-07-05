@@ -19,9 +19,9 @@ They're highly tailored to an individual setup, so they may not work out the box
   - 10TB WesternDigital HDD
 - Tethys: NixOS 25.11
   - `nix/hosts/laptop`
-  - Intel Core i5-113567
+  - AMD Ryzen 7 8840HS
   - Integrated graphics
-  - 8GB RAM
+  - 16GB RAM
   - 500GB NVME SSD
 
 # services
