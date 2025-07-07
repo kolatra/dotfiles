@@ -8,4 +8,4 @@ rm ~/.config/fastfetch
 ln -s ~/dotfiles/config/fastfetch ~/.config/fastfetch
 
 rm ~/scripts
-ln -s ~/dotfiles/config/scripts ~/scripts
+ln -s ~/dotfiles/scripts ~/scripts
