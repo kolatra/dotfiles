@@ -25,8 +25,8 @@
     obsidian
     p7zip
     ripgrep
-    latte-dock
-    plasma-panel-colorizer
+    # latte-dock
+    # plasma-panel-colorizer
     spotify
     thunderbird
     unzip
