@@ -1,8 +1,6 @@
 # dotfiles
 
-My configuration files for my computers at home. :)
-
-They're highly tailored to an individual setup, so they may not work out the box without some changes.
+My config files for my computers at home. :)
 
 # current setup
 - Pandora: Fedora 42
@@ -25,12 +23,10 @@ They're highly tailored to an individual setup, so they may not work out the box
   - 500GB NVME SSD
 
 # services
-`Titan` serves as a host for many home services, such as:
   - NGINX
   - Samba File Sharing
-  - GregTech: New Horizons server
-  - Monifactory server
-  - Automated backups with Restic
-  - Secure secret handling with Agenix
+  - Minecraft servers
+  - Restic: Backups
+  - Agenix: Secrets
 
 All devices have Tailscale
